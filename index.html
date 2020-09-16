@@ -8,75 +8,14 @@
   </head>
   <body>
     <div id="game-container">
-      <div id="player-order" class="turn-order-container">Player 1 turn:</div>
-      <div id="row1" class="row">
-        <div
-          id="1"
-          class="square"
-          onclick="squareClick(this)"
-          onmouseover="hoverSquareSelection(this)"
-          onmouseleave="resetChoosingSquareStyle(this)"
-        ></div>
-        <div
-          id="2"
-          class="square"
-          onclick="squareClick(this)"
-          onmouseover="hoverSquareSelection(this)"
-          onmouseleave="resetChoosingSquareStyle(this)"
-        ></div>
-        <div
-          id="3"
-          class="square"
-          onclick="squareClick(this)"
-          onmouseover="hoverSquareSelection(this)"
-          onmouseleave="resetChoosingSquareStyle(this)"
-        ></div>
-      </div>
-      <div id="row2" class="row">
-        <div
-          id="4"
-          class="square"
-          onclick="squareClick(this)"
-          onmouseover="hoverSquareSelection(this)"
-          onmouseleave="resetChoosingSquareStyle(this)"
-        ></div>
-        <div
-          id="5"
-          class="square"
-          onclick="squareClick(this)"
-          onmouseover="hoverSquareSelection(this)"
-          onmouseleave="resetChoosingSquareStyle(this)"
-        ></div>
-        <div
-          id="6"
-          class="square"
-          onclick="squareClick(this)"
-          onmouseover="hoverSquareSelection(this)"
-          onmouseleave="resetChoosingSquareStyle(this)"
-        ></div>
-      </div>
-      <div id="row3" class="row">
-        <div
-          id="7"
-          class="square"
-          onclick="squareClick(this)"
-          onmouseover="hoverSquareSelection(this)"
-          onmouseleave="resetChoosingSquareStyle(this)"
-        ></div>
-        <div
-          id="8"
-          class="square"
-          onclick="squareClick(this)"
-          onmouseover="hoverSquareSelection(this)"
-          onmouseleave="resetChoosingSquareStyle(this)"
-        ></div>
-        <div
-          id="9"
-          class="square"
-          onclick="squareClick(this)"
-          onmouseover="hoverSquareSelection(this)"
-          onmouseleave="resetChoosingSquareStyle(this)"
-        ></div>
+      <form
+        name="form-game-size"
+        onsubmit="createGame(document.getElementById('input-game-size').value); return false;"
+      >
+        <input id="input-game-size" placeholder="Input your board size" onsubmit="clearBoard()"/>
+      </form>
+      <div id="player-order" class="turn-order-container">Turn order</div>
+      <div id="game-board">
       </div>
       <button id="button-reset" onclick="resetGame()">Reset Game</button>
     </div>

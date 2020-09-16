@@ -1,16 +1,47 @@
-const winningSets = [
-  new Set([1, 2, 3]),
-  new Set([1, 5, 9]),
-  new Set([2, 5, 8]),
-  new Set([3, 5, 7]),
-  new Set([1, 4, 7]),
-  new Set([4, 5, 6]),
-  new Set([7, 8, 9]),
-  new Set([3, 6, 9]),
-];
+let winningSets = [];
 let player1Set = new Set();
 let player2Set = new Set();
 let turnOrder = "Player1";
+
+function createGame(boardSize) {
+  clearBoard();
+  resetGame();
+  console.log(`Starting game with ${boardSize}x${boardSize}`);
+  generateBoard(boardSize);
+  let WSh = []; // array of horizontal winning sets
+  let WSv = []; // array of vertical winning sets
+  for (i = 0; i < boardSize; i++) {
+    let tempSet = new Set();
+    for (j = 1; j <= boardSize; j++) {
+      tempSet.add(boardSize * i + j);
+    }
+    WSh.push(tempSet);
+  }
+
+  for (i = 1; i <= boardSize; i++) {
+    let tempSet = new Set();
+    for (j = 0; j < boardSize; j++) {
+      tempSet.add(boardSize * j + i);
+    }
+    WSv.push(tempSet);
+  }
+
+  let diagonalSet1 = new Set();
+  let diagonalSet2 = new Set();
+  for (i = 0; i < boardSize; i++) {
+    diagonalSet1.add(i * boardSize + i + 1);
+    diagonalSet2.add((i + 1) * boardSize - i);
+  }
+  winningSets = [];
+  WSh.forEach((set) => winningSets.push(set));
+  WSv.forEach((set) => winningSets.push(set));
+  winningSets.push(diagonalSet1);
+  winningSets.push(diagonalSet2);
+  // console.log(diagonalSet1);
+  // console.log(diagonalSet2);
+  // console.log(WSh);
+  // console.log(WSv);
+}
 
 function isSuperset(set, subset) {
   for (let elem of subset) {
@@ -19,6 +50,34 @@ function isSuperset(set, subset) {
     }
   }
   return true;
+}
+
+function generateBoard(boardSize) {
+  for (i = 0; i < boardSize; i++) {
+    let row = document.createElement("div");
+    row.className = "row";
+    row.id = `row${i}`;
+
+    for (j = 1; j <= boardSize; j++) {
+      let square = document.createElement("div");
+      square.className = "square";
+      square.id = `${boardSize * i + j}`;
+      square.addEventListener("click", () => squareClick(square));
+      // square.setAttribute("onclick", 'squareClick(square)');
+      square.addEventListener("mouseover", () => hoverSquareSelection(square));
+      // square.setAttribute("onmouseover", 'hoverSquareSelection(square)');
+      square.addEventListener("mouseleave", () =>
+        resetChoosingSquareStyle(square)
+      );
+      // square.setAttribute("onmouseleave", 'resetChoosingSquareStyle(square)');
+      row.appendChild(square);
+    }
+    document.getElementById("game-board").appendChild(row);
+  }
+}
+
+function clearBoard() {
+  document.getElementById("game-board").innerHTML = "";
 }
 
 function resetGame() {
