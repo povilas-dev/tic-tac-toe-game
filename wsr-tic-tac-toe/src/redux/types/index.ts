@@ -4,6 +4,7 @@ import {
     GENERATE_WINNING_SCENARIOS,
     SELECT_SQUARE,
     SET_GAME_STATE,
+    SET_CREATE_GAME_MODAL_STATE,
 } from '../actions';
 
 export enum GAME_STATE {
@@ -31,6 +32,7 @@ export interface SquareState {
 export interface AppState {
     board: BoardState;
     winningScenarios: Array<Array<number>>;
+    createGameModalIsVisible: boolean;
 }
 
 // ACTION TYPES
@@ -59,5 +61,11 @@ export interface SetGameState {
   payload: GAME_STATE;
 }
 
+export interface SetCreateGameModalState {
+    type: typeof SET_CREATE_GAME_MODAL_STATE;
+    payload: boolean;
+  }
+
 export type WinningScenarioActionTypes = GenerateWinningScenarios;
 export type BoardStateActionTypes = CreateBoard  | ClearBoard | SelectSquare | SetGameState;
+export type CreateGameModalActionTypes = SetCreateGameModalState;
