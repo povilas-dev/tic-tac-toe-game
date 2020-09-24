@@ -9,29 +9,33 @@ import {
     BOARD_SIZE_MORE_THAN_ZERO,
     BOARD_SIZE_NUMERIC,
 } from '../../constants';
-import { useDispatch } from 'react-redux';
-import { createBoard, generateWinningScenariosAction } from '../../redux/actions';
-export interface ModalProps {
-    isVisible: boolean;
-    setIsModalVisible: (isModalVisible: boolean) => void;
-}
-export const CreateGameModal: React.FC<ModalProps> = (props: ModalProps) => {
+import { useDispatch, useSelector } from 'react-redux';
+import {
+    createBoard,
+    generateWinningScenariosAction,
+    setIsCreateGameModalVisible,
+} from '../../redux/actions';
+import { AppState } from '../../redux/types';
+export const CreateGameModal: React.FC<{}> = () => {
     const [boardSize, setBoardSize] = useState<string | null>(null);
+    const isCreateGameModalVisible = useSelector(
+        (state: AppState) => state.createGameModalIsVisible
+    );
     const dispatch = useDispatch();
     const numericInputRegexp = /^\d+$/;
     function handleModalConfirmation(): void {
         if (boardSize && parseInt(boardSize) > 0 && numericInputRegexp.test(boardSize)) {
             dispatch(createBoard(parseInt(boardSize)));
             dispatch(generateWinningScenariosAction(parseInt(boardSize)));
-            props.setIsModalVisible(false);
+            dispatch(setIsCreateGameModalVisible(false));
         }
     }
     return (
-        <Modal isOpen={props.isVisible}>
+        <Modal isOpen={isCreateGameModalVisible}>
             <MessageBoxFunctionalLayout
                 confirmText={CONFIRM_TEXT}
                 onOk={() => handleModalConfirmation()}
-                onClose={() => props.setIsModalVisible(false)}
+                onClose={() => dispatch(setIsCreateGameModalVisible(false))}
                 title={SET_GAME_BOARD_SIZE}
             >
                 <p id="set-board-size-info">{SET_BOARD_SIZE_DESCRIPTION}</p>
