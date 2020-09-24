@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { st, classes } from './app.st.css';
 import { Button } from 'wix-style-react';
 import { CREATE_GAME_BOARD } from './constants';
-import { setGameState } from './redux/actions';
+import { setGameState, setIsCreateGameModalVisible } from './redux/actions';
 import { useDispatch, useSelector } from 'react-redux';
 import { GameBoard } from './components/game-board';
 import { AppState, SquareState, GAME_STATE } from './redux/types';
@@ -14,7 +14,6 @@ export interface AppProps {
 }
 
 export const App: React.FC<AppProps> = ({ className }) => {
-    const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
     const turnOrder = useSelector((state: AppState) => state.board.turnOrder);
     const winningScenarios = useSelector((state: AppState) => state.winningScenarios);
     const boardCreated = useSelector((state: AppState) => state.board.created);
@@ -37,12 +36,12 @@ export const App: React.FC<AppProps> = ({ className }) => {
     return (
         <main className={st(classes.root, className)}>
             <Button
-                onClick={() => setIsModalVisible(!isModalVisible)}
+                onClick={() => dispatch(setIsCreateGameModalVisible(true))}
                 className={'create-game-button'}
             >
                 {CREATE_GAME_BOARD}
             </Button>
-            <CreateGameModal isVisible={isModalVisible} setIsModalVisible={setIsModalVisible} />
+            <CreateGameModal />
             <GameBoard />
         </main>
     );
