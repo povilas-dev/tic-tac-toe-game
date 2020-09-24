@@ -1,14 +1,14 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Square } from '../square';
-import { AppState, GAME_STATE } from '../../redux/types';
+import { GAME_STATE, AppState } from '../../redux/types';
 import { st, classes } from '../../app.st.css';
 import { Button } from 'wix-style-react';
 import { clearBoard } from '../../redux/actions';
 import { Heading } from 'wix-style-react';
 import Confetti from 'react-confetti';
 import { useWindowSize } from '@react-typed-hooks/use-window-size';
-import { RESET_GAME, PLAYER1_WON } from '../../constants';
+import { RESET_GAME, PLAYER1_WON, PLAYER2_WON } from '../../constants';
 const GameBoard: React.FunctionComponent<{}> = () => {
     const boardState = useSelector((state: AppState) => state.board);
     const dispatch = useDispatch();
@@ -32,7 +32,7 @@ const GameBoard: React.FunctionComponent<{}> = () => {
                     {boardState.gameState === GAME_STATE.PLAYER1_WON
                         ? PLAYER1_WON
                         : boardState.gameState === GAME_STATE.PLAYER2_WON
-                        ? PLAYER1_WON
+                        ? PLAYER2_WON
                         : `${
                               boardState.turnOrder.charAt(0).toUpperCase() +
                               boardState.turnOrder.slice(1)

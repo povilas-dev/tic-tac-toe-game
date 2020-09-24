@@ -1,7 +1,5 @@
 import {
     CREATE_BOARD,
-    CLEAR_WINNING_SCENARIOS,
-    REMOVE_BOARD,
     CLEAR_BOARD,
     GENERATE_WINNING_SCENARIOS,
     SELECT_SQUARE,
@@ -17,10 +15,6 @@ export enum GAME_STATE {
 
 
 // STATES
-export interface WinningScenariosState {
-    conditions: Array<Array<number>>;
-}
-
 export interface BoardState {
     boardSize: number;
     created: Boolean;
@@ -31,8 +25,7 @@ export interface BoardState {
 
 export interface SquareState {
     id: number;
-    selected: boolean;
-    selectedBy: string;
+    selectedBy: string | null;
 }
 
 export interface AppState {
@@ -42,19 +35,9 @@ export interface AppState {
 
 // ACTION TYPES
 
-export interface ClearWinningScenarios {
-    type: typeof CLEAR_WINNING_SCENARIOS;
-    payload: [];
-}
-
 export interface CreateBoard {
     type: typeof CREATE_BOARD;
     payload: number;
-}
-
-export interface RemoveBoard {
-    type: typeof REMOVE_BOARD;
-    payload: BoardState;
 }
 
 export interface ClearBoard {
@@ -76,5 +59,5 @@ export interface SetGameState {
   payload: GAME_STATE;
 }
 
-export type WinningScenarioActionTypes = ClearWinningScenarios | GenerateWinningScenarios;
-export type BoardStateActionTypes = CreateBoard | RemoveBoard | ClearBoard | SelectSquare | SetGameState;
+export type WinningScenarioActionTypes = GenerateWinningScenarios;
+export type BoardStateActionTypes = CreateBoard  | ClearBoard | SelectSquare | SetGameState;
