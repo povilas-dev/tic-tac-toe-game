@@ -25,7 +25,6 @@ export function selectSquare(squareId: number, player: string) {
     return {
         type: SELECT_SQUARE,
         payload: {
-            selected: true,
             id: squareId,
             selectedBy: player,
         },
