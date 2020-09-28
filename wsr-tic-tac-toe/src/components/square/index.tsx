@@ -4,12 +4,13 @@ import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { AppState, SquareState, GAME_STATE } from '../../redux/types';
 import { selectSquare } from '../../redux/actions';
+import { SQUARE_ARIA_LABEL } from '../../constants';
 
 export interface SquareProps {
     id: number;
 }
 const Square: React.FunctionComponent<SquareProps> = (props: SquareProps) => {
-    const turnOrder = useSelector((state: AppState) => state.board.turnOrder); // shouldn't I be able to do: useSelector((state: BoardState) => state.turnOrder); here ? 
+    const turnOrder = useSelector((state: AppState) => state.board.turnOrder); // shouldn't I be able to do: useSelector((state: BoardState) => state.turnOrder); here ?
     const gameState = useSelector((state: AppState) => state.board.gameState);
     const [hovering, setHovering] = useState<string | null>(null);
     const squareState = useSelector((state: AppState) =>
@@ -23,6 +24,11 @@ const Square: React.FunctionComponent<SquareProps> = (props: SquareProps) => {
     }
     return squareState !== undefined ? (
         <div
+            aria-label={
+                squareState.selectedBy === null
+                    ? SQUARE_ARIA_LABEL
+                    : `${SQUARE_ARIA_LABEL} ${squareState.selectedBy}`
+            }
             className={
                 squareState.selectedBy === null
                     ? hovering

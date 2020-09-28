@@ -9,6 +9,7 @@ export const PLAYER1_WON = 'Player1 won!';
 export const PLAYER2_WON = 'Player2 won!';
 export const BOARD_SIZE_NUMERIC = 'Board size can only contain numbers!';
 export const BOARD_SIZE_MORE_THAN_ZERO = 'Board size has to be greater than 0!';
+export const SQUARE_ARIA_LABEL = "square";
 
 // DATA HOOKS
 export const BOARD_SIZE_INPUT = 'BOARD_SIZE_INPUT';
