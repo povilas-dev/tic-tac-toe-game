@@ -16,6 +16,7 @@ import {
     BOARD_SIZE_MORE_THAN_ZERO,
     TURN_ORDER_HEADING,
     RESET_GAME_BUTTON,
+    SQUARE_ARIA_LABEL,
 } from '../constants';
 import { App } from '../app';
 import { createBoard, generateWinningScenariosAction } from '../redux/actions';
@@ -88,7 +89,7 @@ describe('GameBoard', () => {
 
     it('should reset all squares after clicking reset game button', async () => {
         // click a square, so the state would change from initial state
-        let squareElements = screen.getAllByLabelText('square');
+        let squareElements = screen.getAllByLabelText(SQUARE_ARIA_LABEL);
         squareElements[0].click();
         const resetGameButtonDriver = ButtonTestkit({
             wrapper: wrapper,
@@ -104,7 +105,7 @@ describe('GameBoard', () => {
             dataHook: TURN_ORDER_HEADING,
         });
         expect((await turnOrderHeadingDriver.getText()) === "Player1's turn").toBeTruthy();
-        expect(screen.getAllByLabelText('square').length).toEqual(4);
+        expect(screen.getAllByLabelText(SQUARE_ARIA_LABEL).length).toEqual(4);
     });
 
     it('should show "Player1\'s turn" after creating a game with boardSize: 2', async () => {
@@ -125,11 +126,11 @@ describe('GameBoard', () => {
     });
 
     it('should show ONLY 4 squares after creating a game with boardSize: 2', async () => {
-        expect(screen.getAllByLabelText('square').length).toEqual(4);
+        expect(screen.getAllByLabelText(SQUARE_ARIA_LABEL).length).toEqual(4);
     });
 
     it('should change turn order after clicking a square', async () => {
-        let squareElements = screen.getAllByLabelText('square');
+        let squareElements = screen.getAllByLabelText(SQUARE_ARIA_LABEL);
         squareElements[0].click();
         const turnOrderHeadingDriver = HeadingTestkit({
             wrapper,
@@ -140,10 +141,10 @@ describe('GameBoard', () => {
     });
 
     it('should change square to player1 after clicking it', async () => {
-        let squareElements = screen.getAllByLabelText('square');
+        let squareElements = screen.getAllByLabelText(SQUARE_ARIA_LABEL);
         squareElements[0].click();
-        expect(screen.getAllByLabelText('square').length).toEqual(3);
-        let selectedSquares = screen.getAllByLabelText('player1');
+        expect(screen.getAllByLabelText(SQUARE_ARIA_LABEL).length).toEqual(3);
+        let selectedSquares = screen.getAllByLabelText(`${SQUARE_ARIA_LABEL} player1`);
         expect(selectedSquares.length).toEqual(1);
     });
 });

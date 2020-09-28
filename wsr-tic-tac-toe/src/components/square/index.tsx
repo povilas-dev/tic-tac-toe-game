@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { AppState, SquareState, GAME_STATE } from '../../redux/types';
 import { selectSquare } from '../../redux/actions';
+import { SQUARE_ARIA_LABEL } from '../../constants';
 
 export interface SquareProps {
     id: number;
@@ -25,10 +26,8 @@ const Square: React.FunctionComponent<SquareProps> = (props: SquareProps) => {
         <div
             aria-label={
                 squareState.selectedBy === null
-                    ? hovering
-                        ? hovering
-                        : "square"
-                    : squareState.selectedBy
+                    ? SQUARE_ARIA_LABEL
+                    : `${SQUARE_ARIA_LABEL} ${squareState.selectedBy}`
             }
             className={
                 squareState.selectedBy === null
