@@ -8,6 +8,9 @@ import {
     SET_BOARD_SIZE_INFO_TOOLTIP,
     BOARD_SIZE_MORE_THAN_ZERO,
     BOARD_SIZE_NUMERIC,
+    BOARD_SIZE_INPUT,
+    CREATE_GAME_MODAL,
+    CREATE_GAME_MESSAGE_BOX,
 } from '../../constants';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -31,8 +34,9 @@ export const CreateGameModal: React.FC<{}> = () => {
         }
     }
     return (
-        <Modal isOpen={isCreateGameModalVisible}>
+        <Modal isOpen={isCreateGameModalVisible} dataHook={CREATE_GAME_MODAL}>
             <MessageBoxFunctionalLayout
+                dataHook={CREATE_GAME_MESSAGE_BOX}
                 confirmText={CONFIRM_TEXT}
                 onOk={() => handleModalConfirmation()}
                 onClose={() => dispatch(setIsCreateGameModalVisible(false))}
@@ -42,6 +46,7 @@ export const CreateGameModal: React.FC<{}> = () => {
                 <InputWithLabel
                     onChange={(event) => setBoardSize(event.target.value)}
                     label={BOARD_SIZE}
+                    dataHook={BOARD_SIZE_INPUT}
                     suffix={[<InfoIcon content={SET_BOARD_SIZE_INFO_TOOLTIP} />]}
                     status={
                         (boardSize && parseInt(boardSize) === 0) ||

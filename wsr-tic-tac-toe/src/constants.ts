@@ -9,3 +9,11 @@ export const PLAYER1_WON = 'Player1 won!';
 export const PLAYER2_WON = 'Player2 won!';
 export const BOARD_SIZE_NUMERIC = 'Board size can only contain numbers!';
 export const BOARD_SIZE_MORE_THAN_ZERO = 'Board size has to be greater than 0!';
+
+// DATA HOOKS
+export const BOARD_SIZE_INPUT = 'BOARD_SIZE_INPUT';
+export const CREATE_GAME_BUTTON = 'CREATE_GAME_BUTTON';
+export const CREATE_GAME_MODAL = 'CREATE_GAME_MODAL';
+export const TURN_ORDER_HEADING = 'TURN_ORDER_HEADING';
+export const CREATE_GAME_MESSAGE_BOX = 'CREATE_GAME_MESSAGE_BOX';
+export const RESET_GAME_BUTTON = 'RESET_GAME_BUTTON';

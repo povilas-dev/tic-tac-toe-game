@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { st, classes } from './app.st.css';
 import { Button } from 'wix-style-react';
-import { CREATE_GAME_BOARD } from './constants';
+import { CREATE_GAME_BOARD, CREATE_GAME_BUTTON } from './constants';
 import { setGameState, setIsCreateGameModalVisible } from './redux/actions';
 import { useDispatch, useSelector } from 'react-redux';
 import { GameBoard } from './components/game-board';
@@ -38,6 +38,7 @@ export const App: React.FC<AppProps> = ({ className }) => {
             <Button
                 onClick={() => dispatch(setIsCreateGameModalVisible(true))}
                 className={'create-game-button'}
+                dataHook={CREATE_GAME_BUTTON}
             >
                 {CREATE_GAME_BOARD}
             </Button>

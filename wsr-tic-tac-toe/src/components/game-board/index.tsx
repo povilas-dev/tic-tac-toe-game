@@ -8,7 +8,13 @@ import { clearBoard } from '../../redux/actions';
 import { Heading } from 'wix-style-react';
 import Confetti from 'react-confetti';
 import { useWindowSize } from '@react-typed-hooks/use-window-size';
-import { RESET_GAME, PLAYER1_WON, PLAYER2_WON } from '../../constants';
+import {
+    RESET_GAME,
+    PLAYER1_WON,
+    PLAYER2_WON,
+    TURN_ORDER_HEADING,
+    RESET_GAME_BUTTON,
+} from '../../constants';
 const GameBoard: React.FunctionComponent<{}> = () => {
     const boardState = useSelector((state: AppState) => state.board);
     const dispatch = useDispatch();
@@ -28,7 +34,7 @@ const GameBoard: React.FunctionComponent<{}> = () => {
                 <Confetti width={size?.width} height={size?.height} />
             ) : null}
             {boardState.boardSize > 0 ? (
-                <Heading id="turn-order">
+                <Heading id="turn-order" dataHook={TURN_ORDER_HEADING}>
                     {boardState.gameState === GAME_STATE.PLAYER1_WON
                         ? PLAYER1_WON
                         : boardState.gameState === GAME_STATE.PLAYER2_WON
@@ -43,16 +49,18 @@ const GameBoard: React.FunctionComponent<{}> = () => {
                 {boardState.boardSize > 0
                     ? matrix.map((row, i) => {
                           return (
-                              <div className={st(classes.row)} id={`row-${i}`}>
+                              <div className={st(classes.row)} id={`row-${i}`} key={`row-${i}`}>
                                   {row.map((el: number) => {
-                                      return <Square id={el} />;
+                                      return <Square id={el} key={el} />;
                                   })}
                               </div>
                           );
                       })
                     : null}
                 {boardState.created ? (
-                    <Button onClick={() => handleResetGame()}>{RESET_GAME}</Button>
+                    <Button dataHook={RESET_GAME_BUTTON} onClick={() => handleResetGame()}>
+                        {RESET_GAME}
+                    </Button>
                 ) : null}
             </div>
         </>
