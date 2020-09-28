@@ -14,6 +14,7 @@ module.exports = {
       '/node_modules/(?!(.*?\\.st\\.css$))', // libraries publish .st.css files in their dist
     ],
     "moduleNameMapper": {
-      "\\.(css|less|scss)$": "identity-obj-proxy"
+      "\\.(less|scss)$": "identity-obj-proxy"
     },
+    moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
   }

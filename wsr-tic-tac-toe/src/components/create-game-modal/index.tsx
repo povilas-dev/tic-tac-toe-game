@@ -10,6 +10,7 @@ import {
     BOARD_SIZE_NUMERIC,
     BOARD_SIZE_INPUT,
     CREATE_GAME_MODAL,
+    CREATE_GAME_MESSAGE_BOX,
 } from '../../constants';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -35,6 +36,7 @@ export const CreateGameModal: React.FC<{}> = () => {
     return (
         <Modal isOpen={isCreateGameModalVisible} dataHook={CREATE_GAME_MODAL}>
             <MessageBoxFunctionalLayout
+                dataHook={CREATE_GAME_MESSAGE_BOX}
                 confirmText={CONFIRM_TEXT}
                 onOk={() => handleModalConfirmation()}
                 onClose={() => dispatch(setIsCreateGameModalVisible(false))}
